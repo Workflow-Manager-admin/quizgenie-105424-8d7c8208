@@ -105,13 +105,13 @@ describe("QuizGenie Main App - End-to-End & UI/Logic Tests", () => {
 
   it("lets user reset/restart quiz at any time", async () => {
     render(<App />);
-    userEvent.type(screen.getByPlaceholderText(/e\.g\.\s*Quantum Physics/i), "Something");
+    userEvent.type(screen.getByPlaceholderText(/e\.g\.\\s*Quantum Physics/i), "Something");
     userEvent.click(screen.getByRole("button", { name: /generate quiz/i }));
     const restart = await screen.findByRole("button", { name: /restart/i });
     userEvent.click(restart);
     // Back to topic selection
     expect(screen.getByRole("button", { name: /generate quiz/i })).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/e\.g\.\s*Quantum Physics/i)).toHaveValue("");
+    expect(screen.getByPlaceholderText(/e\.g\.\\s*Quantum Physics/i)).toHaveValue("");
   });
 
   it("does not allow answering the same question twice", async () => {
